@@ -1,1 +1,4 @@
 A very quick and dirty proof of concept for using Node and Comet via Faye.
+
+Mostly derived from the Faye examples: http://github.com/jcoglan/faye
+And from this lovely post: http://bit.ly/bqkQ9O.

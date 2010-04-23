@@ -1,4 +1,11 @@
-A very quick and dirty proof of concept for using Node and Comet via Faye.
+Node.js + Comet example using Faye.
 
 Mostly derived from the Faye examples: http://github.com/jcoglan/faye
 And from this lovely post: http://bit.ly/bqkQ9O.
+
+Usage: node server.js [port]
+
+Starts an http server on port [port], defaults to 8000.
+Then by navigating to http://127.0.0.1:[port], magic will happen.
+Client currently configured to wait for messages from the server. Server
+Sends messages via stdin.

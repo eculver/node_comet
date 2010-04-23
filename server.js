@@ -19,7 +19,7 @@ var fs    = require('fs'),
     http  = require('http')
     faye  = require('./faye');
 
-var PUBLIC_DIR = path.dirname(__filename) + '',
+var PUBLIC_DIR = path.dirname(__filename),
     server     = new faye.NodeAdapter({mount: '/comet', timeout: 45}),
     client     = server.getClient();
     port       = process.ARGV[2] || '8000';
@@ -54,11 +54,3 @@ stdin.setEncoding('utf8');
 stdin.addListener('data', function(chunk) {
     client.publish('/node_comet', {msg: chunk});
 });
-
-// let's talk to the client eh? 
-/*
-setInterval(function(){
-    sys.puts("publishing...");
-    client.publish('/my/channel', {msg: "terds!"});
-}, 10000);
-*/

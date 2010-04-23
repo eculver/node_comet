@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Comet Fun!</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+        <script type="text/javascript" src="/comet.js"></script>
+        <script type="text/javascript">
+            CometClient = new Faye.Client('/comet');
+            CometClient.connect();
+            CometClient.subscribe('/node_comet', function(message) {
+                $("#messages").append("<div>"+message.msg+"</div>");
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Comet Fun!</h1>
+        <p>Messages:</p>
+        <div id="messages"></div>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 /*
  * Node.js + Comet example using Faye.
- * 
+ *
  * Mostly derived from the Faye examples: http://github.com/jcoglan/faye
  * And from this lovely post: http://bit.ly/bqkQ9O.
  *
@@ -15,32 +15,32 @@
 
 var fs    = require('fs'),
     path  = require('path'),
-    sys   = require('sys'), 
+    sys   = require('util'),
     http  = require('http')
     faye  = require('./faye');
 
 var PUBLIC_DIR = path.dirname(__filename),
     server     = new faye.NodeAdapter({mount: '/comet', timeout: 45}),
     client     = server.getClient();
-    port       = process.ARGV[2] || '8000';
+    port       = '8000';
 
 sys.puts('Listening on ' + port);
 
 http.createServer(function(request, response) {
     sys.puts(request.method + ' ' + request.url);
-    
+
     // handle Comet request -- haaaaaaaaannnnng.
     if (server.call(request, response)) return;
-        
+
     var path = (request.url === '/') ? '/index.htm' : request.url;
-    fs.readFile(PUBLIC_DIR + path, function(err, content) { 
+    fs.readFile(PUBLIC_DIR + path, function(err, content) {
         if (content == null || content.length < 2) {
             sys.puts("404!");
-            response.sendHeader(404);
+            response.setHeader("404",{});
             response.write("Not found!");
             response.end();
         } else {
-            response.sendHeader(200, {'Content-Type': 'text/html'});
+            response.setHeader("200", {'Content-Type': 'text/html'});
             response.write(content);
             response.end();
         }
